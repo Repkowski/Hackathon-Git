@@ -103,8 +103,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textBrowsePath1">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textBrowsePath2">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnBrowsePath1">
       <Properties>

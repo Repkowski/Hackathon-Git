@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -52,6 +53,10 @@ public class formInit extends javax.swing.JFrame {
         jLabel2.setText(" File #1");
 
         jLabel3.setText(" File #2");
+
+        textBrowsePath1.setEditable(false);
+
+        textBrowsePath2.setEditable(false);
 
         btnBrowsePath1.setText("Browse");
         btnBrowsePath1.addActionListener(new java.awt.event.ActionListener() {
@@ -134,11 +139,31 @@ public class formInit extends javax.swing.JFrame {
     private void btnBrowsePath2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowsePath2ActionPerformed
         File File2 = getFile();
         textBrowsePath2.setText(File2.getAbsolutePath());
-
     }//GEN-LAST:event_btnBrowsePath2ActionPerformed
 
     private void btnAnalyzeCSVFilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalyzeCSVFilesActionPerformed
-        // TODO add your handling code here:
+        String strPath1 = textBrowsePath1.getText();
+        String strPath2 = textBrowsePath2.getText();
+        
+        if(strPath1.isEmpty() || strPath2.isEmpty())
+        {
+            JOptionPane.showMessageDialog(rootPane, "Please ensure you have selected two files to analyze.", strPath1, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        //These if statements are in place in case a user decides
+        //to change the file format within the file chooser.
+        if(!strPath1.endsWith(".xls") && !strPath1.endsWith(".xlsx") && !strPath1.endsWith(".csv"))
+        {
+            JOptionPane.showMessageDialog(rootPane, "The file at " + strPath1 + " is not an acceptable format. Please select another file.", strPath1, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!strPath2.endsWith(".xls") && !strPath2.endsWith(".xlsx") && !strPath2.endsWith(".csv"))
+        {
+            JOptionPane.showMessageDialog(rootPane,"The file at " + strPath2 + " is not an acceptable format. Please select another file.", strPath2, JOptionPane.ERROR_MESSAGE);
+        }
+        
+        //Call Jason Methods?
     }//GEN-LAST:event_btnAnalyzeCSVFilesActionPerformed
     
     /**
@@ -186,6 +211,12 @@ public class formInit extends javax.swing.JFrame {
     private javax.swing.JTextField textBrowsePath2;
     // End of variables declaration//GEN-END:variables
 
+    /*
+     * getFile() creates a filter for excel files
+     * and allows the user to select a file
+     * 
+     * Author: Tyler Bailey
+     */
     private File getFile() throws HeadlessException {
         final JFileChooser formFileChooser = new JFileChooser();
         FileNameExtensionFilter excelFilter = new FileNameExtensionFilter("Excel Files","xls", "xlsx", "csv");
