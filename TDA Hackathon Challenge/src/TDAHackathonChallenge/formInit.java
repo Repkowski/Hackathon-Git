@@ -188,9 +188,9 @@ public class formInit extends javax.swing.JFrame {
 
     private File getFile() throws HeadlessException {
         final JFileChooser formFileChooser = new JFileChooser();
-        FileNameExtensionFilter xlsFilter = new FileNameExtensionFilter("Excel Files","xls", "xlsx");
+        FileNameExtensionFilter excelFilter = new FileNameExtensionFilter("Excel Files","xls", "xlsx", "csv");
         
-        formFileChooser.setFileFilter(xlsFilter);
+        formFileChooser.setFileFilter(excelFilter);
         int returnVal = formFileChooser.showOpenDialog(lblTitle);
         
         if(returnVal == JFileChooser.APPROVE_OPTION)
