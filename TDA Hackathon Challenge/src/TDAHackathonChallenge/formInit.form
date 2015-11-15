@@ -29,16 +29,16 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="btnAnalyzeCSVFiles" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="textBrowsePath1" min="-2" pref="251" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="textBrowsePath2" max="32767" attributes="0"/>
+                              <Component id="textBrowsePath2" min="-2" pref="257" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -77,12 +77,12 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value=" File #1"/>
+        <Property name="text" type="java.lang.String" value="Employer File"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value=" File #2"/>
+        <Property name="text" type="java.lang.String" value="Student File"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textBrowsePath1">

@@ -6,6 +6,7 @@ package TDAHackathonChallenge;
 
 import java.awt.HeadlessException;
 import java.io.File;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -14,6 +15,11 @@ import org.knowm.xchart.ChartBuilder;
 import org.knowm.xchart.StyleManager.ChartType;
 import org.knowm.xchart.StyleManager.LegendPosition;
 import org.knowm.xchart.SwingWrapper;
+import translationaldataanalytics.ArrayListIterate;
+import translationaldataanalytics.Comparer;
+import translationaldataanalytics.Employer;
+import translationaldataanalytics.FileParser;
+import translationaldataanalytics.Student;
 
 /**
  *
@@ -48,9 +54,9 @@ public class formInit extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("File Selection");
 
-        jLabel2.setText(" File #1");
+        jLabel2.setText("Employer File");
 
-        jLabel3.setText(" File #2");
+        jLabel3.setText("Student File");
 
         textBrowsePath1.setEditable(false);
 
@@ -86,7 +92,7 @@ public class formInit extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnAnalyzeCSVFiles)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -94,7 +100,7 @@ public class formInit extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(textBrowsePath2)))
+                                .addComponent(textBrowsePath2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBrowsePath1)
@@ -144,25 +150,79 @@ public class formInit extends javax.swing.JFrame {
         
         //These if statements are in place in case a user decides
         //to change the file format within the file chooser.
-        if(!strPath1.endsWith(".xls") && !strPath1.endsWith(".csv"))
+        if(!strPath1.endsWith(".xls"))
         {
-            JOptionPane.showMessageDialog(rootPane, "The file at " + strPath1 + " is not an acceptable format. Please select a file in the .xls or .csv format.", strPath1, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "The file at " + strPath1 + " is not an acceptable format. Please select a file in the .xls format.", strPath1, JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if(!strPath2.endsWith(".xls") && !strPath2.endsWith(".csv"))
+        if(!strPath2.endsWith(".xls"))
         {
-            JOptionPane.showMessageDialog(rootPane,"The file at " + strPath2 + " is not an acceptable format. Please select a file in the .xls or .csv format.", strPath2, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane,"The file at " + strPath2 + " is not an acceptable format. Please select a file in the .xls format.", strPath2, JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        //Call Jason Methods?
+        //Written by Jason
+        FileParser parser = new FileParser();
+        parser.parseFiles(strPath1, strPath2);
+        ArrayList<Employer> employers = parser.getEmployers();
+        ArrayList<Student> students = parser.getStudents();
+        ArrayListIterate ali = new ArrayListIterate(students,employers);
+        ali.uniqueEmployer();
+        ali.uniqueStudent();
+        ArrayList<String> employerWords = ali.employUniWord;
+        ArrayList<Integer> employerCount = ali.employWordCount;
+        ArrayList<String> studentWords = ali.studUniWord;
+        ArrayList<Integer> studentCount = ali.studWordCount;
         
-        Chart chart = new ChartBuilder().chartType(ChartType.Bar).width(800).height(600).title("Placeholder").xAxisTitle("Range").yAxisTitle("Words").build();
-        chart.addSeries("Placeholder", new double[] {0,1,2,3,4}, new double[] {0,1,2,3,4});
+        Comparer comp = new Comparer();
+        comp.compareWords(employerWords, employerCount, studentWords, studentCount);
+        ArrayList<String> matchedWords = comp.getMatchedWords();
+        ArrayList<Integer> matchedWordCount = comp.getMatchedWordCount();
         
-        chart.getStyleManager().setLegendPosition(LegendPosition.InsideNW);
+        //Written by Tyler     
+        matchedWords.remove(0);
+        matchedWordCount.remove(0);
         
-        new SwingWrapper(chart).displayChart();
+        ArrayList<Integer> lowestVals = new ArrayList<Integer>();
+        ArrayList<Integer> highestVals = new ArrayList<Integer>();
+        ArrayList<String> lowValMatchedWords = new ArrayList<String>();
+        ArrayList<String> highValMatchedWords = new ArrayList<String>();
+        
+        for(int i = 0; i < matchedWordCount.size(); i++)
+        {
+            if(matchedWordCount.get(i) > -1200 && matchedWordCount.get(i) < -600)
+            {
+                lowestVals.add(matchedWordCount.get(i));
+                lowValMatchedWords.add(matchedWords.get(i));
+            }
+        }
+        
+        for(int i = 0; i < matchedWordCount.size(); i++)
+        {
+            if(matchedWordCount.get(i) > 9)
+            {
+                highestVals.add(matchedWordCount.get(i));
+                highValMatchedWords.add(matchedWords.get(i));
+            }
+        }
+        
+        
+        
+        Chart lowChart = new ChartBuilder().chartType(ChartType.Bar).width(800).height(600).title("Placeholder").xAxisTitle("Words Used Most by Employers").yAxisTitle("Range").build();
+        lowChart.addSeries("Placeholder", lowValMatchedWords, lowestVals);
+        
+        
+        lowChart.getStyleManager().setLegendPosition(LegendPosition.InsideNW);
+        
+        new SwingWrapper(lowChart).displayChart();
+        
+        Chart highChart = new ChartBuilder().chartType(ChartType.Bar).width(800).height(600).title("Placeholder").xAxisTitle("Words Used Most by Students").yAxisTitle("Range").build();
+        highChart.addSeries("Placeholder", highValMatchedWords, highestVals);
+        
+        
+        highChart.getStyleManager().setLegendPosition(LegendPosition.InsideNW);
+        
+        new SwingWrapper(highChart).displayChart();
     }//GEN-LAST:event_btnAnalyzeCSVFilesActionPerformed
     
     /**
@@ -217,7 +277,7 @@ public class formInit extends javax.swing.JFrame {
      */
     private File getFile() throws HeadlessException {
         final JFileChooser formFileChooser = new JFileChooser();
-        FileNameExtensionFilter excelFilter = new FileNameExtensionFilter("Excel Files","xls", "csv");
+        FileNameExtensionFilter excelFilter = new FileNameExtensionFilter("Excel Files","xls");
         
         formFileChooser.setFileFilter(excelFilter);
         int returnVal = formFileChooser.showOpenDialog(jLabel2);
