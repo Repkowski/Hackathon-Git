@@ -94,4 +94,12 @@ public class Student {
     public String getPersonalSkills() {
         return this.personalSkills;
     }
+    
+    public String getCourses(){
+        return this.courses;
+    }
+    
+    public String getProjects(){
+        return this.projects;
+    }
 }
