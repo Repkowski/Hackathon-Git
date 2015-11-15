@@ -6,6 +6,8 @@
 
 package translationaldataanalytics;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Jason
@@ -17,6 +19,10 @@ public class TranslationalDataAnalytics {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        FileParser parser = new FileParser();
+        parser.parseFiles("Downloads\\TDA Jobs Data Test.xls", "Downloads\\TDA Students Test.xlxs");
+        ArrayList<Employer> employers = parser.getEmployers();
+        ArrayList<Student> students = parser.getStudents();
     }
     
 }
