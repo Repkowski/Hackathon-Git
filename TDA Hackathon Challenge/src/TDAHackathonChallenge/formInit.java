@@ -139,14 +139,14 @@ public class formInit extends javax.swing.JFrame {
         
         //These if statements are in place in case a user decides
         //to change the file format within the file chooser.
-        if(!strPath1.endsWith(".xls") && !strPath1.endsWith(".xlsx") && !strPath1.endsWith(".csv"))
+        if(!strPath1.endsWith(".xls") && !strPath1.endsWith(".csv"))
         {
-            JOptionPane.showMessageDialog(rootPane, "The file at " + strPath1 + " is not an acceptable format. Please select a file in the .xls, .xlsx, or .csv format.", strPath1, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "The file at " + strPath1 + " is not an acceptable format. Please select a file in the .xls or .csv format.", strPath1, JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if(!strPath2.endsWith(".xls") && !strPath2.endsWith(".xlsx") && !strPath2.endsWith(".csv"))
+        if(!strPath2.endsWith(".xls") && !strPath2.endsWith(".csv"))
         {
-            JOptionPane.showMessageDialog(rootPane,"The file at " + strPath2 + " is not an acceptable format. Please select a file in the .xls, .xlsx, or .csv format.", strPath2, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane,"The file at " + strPath2 + " is not an acceptable format. Please select a file in the .xls or .csv format.", strPath2, JOptionPane.ERROR_MESSAGE);
         }
         
         //Call Jason Methods?
@@ -209,7 +209,7 @@ public class formInit extends javax.swing.JFrame {
      */
     private File getFile() throws HeadlessException {
         final JFileChooser formFileChooser = new JFileChooser();
-        FileNameExtensionFilter excelFilter = new FileNameExtensionFilter("Excel Files","xls", "xlsx", "csv");
+        FileNameExtensionFilter excelFilter = new FileNameExtensionFilter("Excel Files","xls", "csv");
         
         formFileChooser.setFileFilter(excelFilter);
         int returnVal = formFileChooser.showOpenDialog(jLabel2);
