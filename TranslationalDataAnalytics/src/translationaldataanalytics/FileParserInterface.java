@@ -32,9 +32,13 @@ public class FileParserInterface extends javax.swing.JFrame {
         ArrayList<Integer> studentCount = ali.studWordCount;
         
         Comparer comp = new Comparer();
-        comp.compareWords(employers, students, employerWords, employerCount, studentWords, studentCount);
-        ArrayList<String> matchedWords = comp.getMatchedWords();
+        //comp.compareWords(employerWords, employerCount, studentWords, studentCount);
+        comp.compareMajors(employers);
+        
+       // ArrayList<String> matchedWords = comp.getMatchedWords();
         ArrayList<Integer> matchedWordCount = comp.getMatchedWordCount();
+        ArrayList<String> matchedMajors = comp.getMatchedMajors();
+        
         
     }
 
