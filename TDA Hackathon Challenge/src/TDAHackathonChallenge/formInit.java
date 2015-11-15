@@ -6,10 +6,6 @@ package TDAHackathonChallenge;
 
 import java.awt.HeadlessException;
 import java.io.File;
-import java.io.FileFilter;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -36,7 +32,6 @@ public class formInit extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitle = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         textBrowsePath1 = new javax.swing.JTextField();
@@ -46,9 +41,7 @@ public class formInit extends javax.swing.JFrame {
         btnAnalyzeCSVFiles = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        lblTitle.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblTitle.setText("File Selection");
+        setTitle("File Selection");
 
         jLabel2.setText(" File #1");
 
@@ -84,36 +77,29 @@ public class formInit extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAnalyzeCSVFiles)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAnalyzeCSVFiles)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(textBrowsePath1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(textBrowsePath2)))
+                                .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnBrowsePath1)
-                                    .addComponent(btnBrowsePath2)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addComponent(lblTitle)))
+                                .addComponent(textBrowsePath1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(textBrowsePath2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBrowsePath1)
+                            .addComponent(btnBrowsePath2))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTitle)
-                .addGap(41, 41, 41)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBrowsePath1)
                     .addComponent(textBrowsePath1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,15 +141,20 @@ public class formInit extends javax.swing.JFrame {
         //to change the file format within the file chooser.
         if(!strPath1.endsWith(".xls") && !strPath1.endsWith(".xlsx") && !strPath1.endsWith(".csv"))
         {
-            JOptionPane.showMessageDialog(rootPane, "The file at " + strPath1 + " is not an acceptable format. Please select another file.", strPath1, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "The file at " + strPath1 + " is not an acceptable format. Please select a file in the .xls, .xlsx, or .csv format.", strPath1, JOptionPane.ERROR_MESSAGE);
             return;
         }
         if(!strPath2.endsWith(".xls") && !strPath2.endsWith(".xlsx") && !strPath2.endsWith(".csv"))
         {
-            JOptionPane.showMessageDialog(rootPane,"The file at " + strPath2 + " is not an acceptable format. Please select another file.", strPath2, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane,"The file at " + strPath2 + " is not an acceptable format. Please select a file in the .xls, .xlsx, or .csv format.", strPath2, JOptionPane.ERROR_MESSAGE);
         }
         
         //Call Jason Methods?
+        
+        this.setVisible(false);
+        
+        formAnalysis frmAnalysis = new formAnalysis();
+        frmAnalysis.setVisible(true);
     }//GEN-LAST:event_btnAnalyzeCSVFilesActionPerformed
     
     /**
@@ -206,7 +197,6 @@ public class formInit extends javax.swing.JFrame {
     private javax.swing.JButton btnBrowsePath2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel lblTitle;
     private javax.swing.JTextField textBrowsePath1;
     private javax.swing.JTextField textBrowsePath2;
     // End of variables declaration//GEN-END:variables
@@ -222,7 +212,7 @@ public class formInit extends javax.swing.JFrame {
         FileNameExtensionFilter excelFilter = new FileNameExtensionFilter("Excel Files","xls", "xlsx", "csv");
         
         formFileChooser.setFileFilter(excelFilter);
-        int returnVal = formFileChooser.showOpenDialog(lblTitle);
+        int returnVal = formFileChooser.showOpenDialog(jLabel2);
         
         if(returnVal == JFileChooser.APPROVE_OPTION)
         {
