@@ -9,6 +9,11 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.knowm.xchart.Chart;
+import org.knowm.xchart.ChartBuilder;
+import org.knowm.xchart.StyleManager.ChartType;
+import org.knowm.xchart.StyleManager.LegendPosition;
+import org.knowm.xchart.SwingWrapper;
 
 /**
  *
@@ -147,14 +152,17 @@ public class formInit extends javax.swing.JFrame {
         if(!strPath2.endsWith(".xls") && !strPath2.endsWith(".csv"))
         {
             JOptionPane.showMessageDialog(rootPane,"The file at " + strPath2 + " is not an acceptable format. Please select a file in the .xls or .csv format.", strPath2, JOptionPane.ERROR_MESSAGE);
+            return;
         }
         
         //Call Jason Methods?
         
-        this.setVisible(false);
+        Chart chart = new ChartBuilder().chartType(ChartType.Bar).width(800).height(600).title("Placeholder").xAxisTitle("Range").yAxisTitle("Words").build();
+        chart.addSeries("Placeholder", new double[] {0,1,2,3,4}, new double[] {0,1,2,3,4});
         
-        formAnalysis frmAnalysis = new formAnalysis();
-        frmAnalysis.setVisible(true);
+        chart.getStyleManager().setLegendPosition(LegendPosition.InsideNW);
+        
+        new SwingWrapper(chart).displayChart();
     }//GEN-LAST:event_btnAnalyzeCSVFilesActionPerformed
     
     /**
