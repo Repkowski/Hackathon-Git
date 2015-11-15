@@ -208,16 +208,16 @@ public class formInit extends javax.swing.JFrame {
         
         
         
-        Chart lowChart = new ChartBuilder().chartType(ChartType.Bar).width(800).height(600).title("Placeholder").xAxisTitle("Words Used Most by Employers").yAxisTitle("Range").build();
-        lowChart.addSeries("Placeholder", lowValMatchedWords, lowestVals);
+        Chart lowChart = new ChartBuilder().chartType(ChartType.Bar).width(1000).height(700).title("Employer Favored Words").xAxisTitle("Words Used Most by Employers").yAxisTitle("Range").build();
+        lowChart.addSeries("Difference of Appereance in Data Sets", lowValMatchedWords, lowestVals);
         
         
         lowChart.getStyleManager().setLegendPosition(LegendPosition.InsideNW);
         
         new SwingWrapper(lowChart).displayChart();
         
-        Chart highChart = new ChartBuilder().chartType(ChartType.Bar).width(800).height(600).title("Placeholder").xAxisTitle("Words Used Most by Students").yAxisTitle("Range").build();
-        highChart.addSeries("Placeholder", highValMatchedWords, highestVals);
+        Chart highChart = new ChartBuilder().chartType(ChartType.Bar).width(1000).height(700).title("Student Favored Words").xAxisTitle("Words Used Most by Students").yAxisTitle("Range").build();
+        highChart.addSeries("Difference of Appereance in Data Sets", highValMatchedWords, highestVals);
         
         
         highChart.getStyleManager().setLegendPosition(LegendPosition.InsideNW);
