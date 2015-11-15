@@ -23,6 +23,23 @@ public class FileParserInterface extends javax.swing.JFrame {
         parser.parseFiles("C:\\Users\\Jason\\Downloads\\TDA Jobs Data Test.xls", "C:\\Users\\Jason\\Downloads\\TDA Students Test.xls");
         ArrayList<Employer> employers = parser.getEmployers();
         ArrayList<Student> students = parser.getStudents();
+        ArrayListIterate ali = new ArrayListIterate(students,employers);
+        ali.uniqueEmployer();
+        ali.uniqueStudent();
+        ArrayList<String> employerWords = ali.employUniWord;
+        ArrayList<Integer> employerCount = ali.employWordCount;
+        ArrayList<String> studentWords = ali.studUniWord;
+        ArrayList<Integer> studentCount = ali.studWordCount;
+        
+        Comparer comp = new Comparer();
+        //comp.compareWords(employerWords, employerCount, studentWords, studentCount);
+        comp.compareMajors(employers);
+        
+       // ArrayList<String> matchedWords = comp.getMatchedWords();
+        ArrayList<Integer> matchedWordCount = comp.getMatchedWordCount();
+        ArrayList<String> matchedMajors = comp.getMatchedMajors();
+        
+        
     }
 
     /**
